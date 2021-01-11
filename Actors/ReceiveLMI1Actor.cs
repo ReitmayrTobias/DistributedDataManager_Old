@@ -15,7 +15,7 @@ namespace DDM_Messwagen.Actors
 
         public ReceiveLMI1Actor(List<IActorRef> subscribers) : base(subscribers)
         {
-
+            // test
         }
 
         public override void StartGenerator(object data = null)
