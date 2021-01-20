@@ -140,3 +140,4 @@ C:\Users\REITMAYRTO\source\repos\Projektmappe_Messwagen\DistributedDataManager\o
 C:\Users\REITMAYRTO\source\repos\Projektmappe_Messwagen\DistributedDataManager\obj\Debug\DDM_Messwagen.LMIView.resources
 C:\Users\REITMAYRTO\source\repos\Projektmappe_Messwagen\DistributedDataManager\obj\Debug\DDM_Messwagen.MainWindow.resources
 C:\Users\REITMAYRTO\source\repos\Projektmappe_Messwagen\DistributedDataManager\obj\Debug\DDM_Messwagen.BaumerView.resources
+C:\Users\REITMAYRTO\source\repos\Projektmappe_Messwagen\DistributedDataManager\obj\Debug\DDM_Messwagen.LMIAdvancedView.resources

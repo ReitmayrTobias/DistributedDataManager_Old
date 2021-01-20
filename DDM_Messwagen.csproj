@@ -39,6 +39,14 @@
     <Reference Include="Akka, Version=1.4.9.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Akka.1.4.9\lib\netstandard2.0\Akka.dll</HintPath>
     </Reference>
+    <Reference Include="GoSdkNet, Version=1.0.7552.22644, Culture=neutral, PublicKeyToken=3e18828f1dab5c8c, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\GoSdkNet.dll</HintPath>
+    </Reference>
+    <Reference Include="kApiNet, Version=1.0.7530.30509, Culture=neutral, PublicKeyToken=aed51b4e56ae495f, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\kApiNet.dll</HintPath>
+    </Reference>
     <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
       <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
     </Reference>
@@ -112,6 +120,7 @@
     <Compile Include="Actors\ProcessDataBaumerActor.cs" />
     <Compile Include="Actors\DataSource.cs" />
     <Compile Include="ViewModel\DDMViewModel.cs" />
+    <Compile Include="ViewModel\LMIAdvancedViewModel.cs" />
     <Compile Include="View\DDMView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -119,6 +128,12 @@
       <DependentUpon>DDMView.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\LMIViewModel.cs" />
+    <Compile Include="View\LMIAdvancedView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\LMIAdvancedView.Designer.cs">
+      <DependentUpon>LMIAdvancedView.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\LMIView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -153,6 +168,9 @@
     <EmbeddedResource Include="View\DDMView.resx">
       <DependentUpon>DDMView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\LMIAdvancedView.resx">
+      <DependentUpon>LMIAdvancedView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\LMIView.resx">
       <DependentUpon>LMIView.cs</DependentUpon>
     </EmbeddedResource>
@@ -176,6 +194,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="View\VisoElements\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

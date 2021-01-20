@@ -19,7 +19,5 @@ namespace DDM_Messwagen.Actors
                 Publish(data);                
             });
         }
-
-        
     }
 }

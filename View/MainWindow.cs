@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Akka.Actor;
@@ -33,6 +34,7 @@ namespace DDM_Messwagen
             var baumerViewModel = baumerView2.GetViewModel(ActorSystemRef);
             var lmiViewModel = lmiView1.GetViewModel(ActorSystemRef);
             var ddmViewModel = ddmView1.GetViewModel(ActorSystemRef);
+
 
             // Create Actors
             var processBaumerProps = Props.Create(() => new ProcessDataBaumerActor(new List<IActorRef>() { baumerViewModel }));
