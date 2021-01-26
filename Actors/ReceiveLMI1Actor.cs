@@ -57,9 +57,24 @@ namespace DDM_Messwagen.Actors
 
                         // FOr Testing
                         Random random = new Random();
-                        LMIData testData = new LMIData();
-                        testData.dummyString = random.Next().ToString();
-                        testData.MyMeasurement = LMIData.Measurement.Test;
+
+                        #region Create Dummy Data
+
+                        List<string> pin1 = new List<string> { random.Next(69, 81).ToString(), random.Next(10, 20).ToString(), random.Next(39, 50).ToString() };
+                        List<string> pin2 = new List<string> { random.Next(72, 84).ToString(), random.Next(10, 20).ToString(), random.Next(39, 50).ToString() };
+                        List<string> pin3 = new List<string> { random.Next(76, 88).ToString(), random.Next(10, 20).ToString(), random.Next(39, 50).ToString() };
+                        List<string> pin4 = new List<string> { random.Next(80, 92).ToString(), random.Next(10, 20).ToString(), random.Next(39, 50).ToString() };
+                        List<string> pin5 = new List<string> { random.Next(84, 96).ToString(), random.Next(10, 20).ToString(), random.Next(39, 50).ToString() };
+                        List<string> pin6 = new List<string> { random.Next(88, 100).ToString(), random.Next(10, 20).ToString(), random.Next(39, 50).ToString() };
+                        List<string> pin7 = new List<string> { random.Next(92, 104).ToString(), random.Next(10, 20).ToString(), random.Next(39, 50).ToString() };
+                        List<string> pin8 = new List<string> { random.Next(96, 108).ToString(), random.Next(10, 20).ToString(), random.Next(39, 50).ToString() };
+
+                        List<string> stringData = new List<string>() { pin1[0], pin1[1], pin1[2], pin2[0], pin2[1], pin2[2], pin3[0], pin3[1], pin3[2], pin4[0], pin4[1], pin4[2], pin5[0], pin5[1], pin5[2], pin6[0], pin6[1], pin6[2], pin7[0], pin7[1], pin7[2], pin8[0], pin8[1], pin8[2] };
+
+                        #endregion
+
+                        LMIData testData = new LMIData(stringData);
+
                         Publish(testData);
                         Thread.Sleep(2000);
                     }
@@ -127,20 +142,27 @@ namespace DDM_Messwagen.Actors
         public class LMIData
         {
             private Measurement myMeasurement;
-            private List<double> dummyData;
-            public string dummyString;
+            private Dictionary<string, List<string>> data;
 
             public LMIData() { }
 
-            public LMIData(List<double> dummyData)
+            public LMIData(List<string> rawData)
             {
-                this.dummyData = dummyData;
-                this.dummyString = dummyString;
+                int jumper = 0;
+                int pinNumber = 1;
+                data = new Dictionary<string, List<string>>();
+                while(data.Count != rawData.Count / 3)
+                {
+                    List<string> pinData = new List<string>() { rawData[jumper], rawData[jumper + 1], rawData[jumper + 2] };
+                    data.Add("Pin " + pinNumber.ToString(), pinData);
+                    pinNumber++;
+                    jumper = jumper + 3;
+                }
             }         
             
             public enum Measurement
             {
-                Test
+                Daimler
             }
 
             public Measurement MyMeasurement
@@ -149,10 +171,10 @@ namespace DDM_Messwagen.Actors
                 set => myMeasurement = value;
             }
 
-            public List<double> DummyData
+            public Dictionary<string, List<string>> Data
             {
-                get => dummyData;
-                set => dummyData = value;
+                get => data;
+                set => data = value;
             }
 
 

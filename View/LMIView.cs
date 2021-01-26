@@ -101,8 +101,7 @@ namespace DDM_Messwagen
                 {
                     int toSend = 0;
                     while (countAdvanced + toSend < savedDataBuffer.Count)
-                    {
-                        var test = savedDataBuffer.ElementAt(toSend + countAdvanced).dummyString;
+                    {                       
                         LMIAdvancedViewModel.Tell(savedDataBuffer.ElementAt(toSend + countAdvanced));
                         toSend++;
                     }
@@ -165,9 +164,19 @@ namespace DDM_Messwagen
 
             switch (measurement)
             {
-                case ReceiveLMI1Actor.LMIData.Measurement.Test:
+                case ReceiveLMI1Actor.LMIData.Measurement.Daimler:
 
-                    dgv_current.Rows.Add(new string[] { lmiData.dummyString });
+                    var newRow = new string[1000];
+                    var index = 1;
+                    foreach (var pin in lmiData.Data)
+                    {
+                        newRow[index] = pin.Value[0];
+                        newRow[index + 1] = pin.Value[1];
+                        newRow[index + 2] = pin.Value[2];
+
+                        index = index + 3;
+                    }
+                    dgv_current.Rows.Add(newRow.ToArray());
                     break;
                 default:
                     break;
@@ -180,9 +189,19 @@ namespace DDM_Messwagen
 
             switch (measurement)
             {
-                case ReceiveLMI1Actor.LMIData.Measurement.Test:
+                case ReceiveLMI1Actor.LMIData.Measurement.Daimler:
 
-                    dgv_savedValues.Rows.Add(new string[] { lmiData.dummyString });
+                    var newRow = new string[1000];
+                    var index = 1;
+                    foreach (var pin in lmiData.Data)
+                    {
+                        newRow[index] = pin.Value[0];
+                        newRow[index + 1] = pin.Value[1];
+                        newRow[index + 2] = pin.Value[2];
+
+                        index = index + 3;
+                    }
+                    dgv_savedValues.Rows.Add(newRow.ToArray());
                     break;
                 default:
                     break;
