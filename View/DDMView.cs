@@ -106,6 +106,7 @@ namespace DDM_Messwagen
         {
             ViewModel.Tell(GeneratorCommand.ContinueGenerator);
         }
+
     }
 
 }

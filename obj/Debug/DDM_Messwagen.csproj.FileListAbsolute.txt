@@ -142,3 +142,7 @@ C:\Users\REITMAYRTO\source\repos\Projektmappe_Messwagen\DistributedDataManager\o
 C:\Users\REITMAYRTO\source\repos\Projektmappe_Messwagen\DistributedDataManager\obj\Debug\DDM_Messwagen.BaumerView.resources
 C:\Users\REITMAYRTO\source\repos\Projektmappe_Messwagen\DistributedDataManager\obj\Debug\DDM_Messwagen.LMIAdvancedView.resources
 C:\Users\REITMAYRTO\source\repos\Projektmappe_Messwagen\DistributedDataManager\obj\Debug\DistributedDataManager.View.VisoElements.DataGraph.resources
+C:\Users\REITMAYRTO\source\repos\Projektmappe_Messwagen\DistributedDataManager\bin\Debug\GoSdkNet.dll
+C:\Users\REITMAYRTO\source\repos\Projektmappe_Messwagen\DistributedDataManager\bin\Debug\kApiNet.dll
+C:\Users\REITMAYRTO\source\repos\Projektmappe_Messwagen\DistributedDataManager\bin\Debug\DLL\bgapi2_genicam_dotnet.dll
+C:\Users\REITMAYRTO\source\repos\Projektmappe_Messwagen\DistributedDataManager\bin\Debug\bgapi2_genicam_dotnet.dll

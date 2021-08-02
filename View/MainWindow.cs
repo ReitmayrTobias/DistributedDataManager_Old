@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Media.Imaging;
 using Akka.Actor;
 using DDM_Messwagen.Actors;
 
@@ -25,10 +27,6 @@ namespace DDM_Messwagen
         private void MainWindow_Load(object sender, EventArgs e)
         {
             ActorSystemRef = ActorSystem.Create("MySystem");
-
-            //// Temp
-            //lmiView1.Visible = false;
-            //.Visible = false;
 
             // Create View Models
             var baumerViewModel = baumerView2.GetViewModel(ActorSystemRef);

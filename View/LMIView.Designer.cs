@@ -35,8 +35,6 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btn_AdvViso = new System.Windows.Forms.Button();
             this.dgv_current = new System.Windows.Forms.DataGridView();
-            this.btn_saveData = new System.Windows.Forms.Button();
-            this.cB_saveData = new System.Windows.Forms.CheckBox();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,6 +60,8 @@
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btn_saveData = new System.Windows.Forms.Button();
+            this.cB_saveData = new System.Windows.Forms.CheckBox();
             this.dgv_savedValues = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn26 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn27 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -88,6 +88,8 @@
             this.dataGridViewTextBoxColumn48 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn49 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn50 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btn_ResetCurrent = new System.Windows.Forms.Button();
+            this.btn_ResetSaved = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_current)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_savedValues)).BeginInit();
@@ -176,26 +178,6 @@
             this.dgv_current.Name = "dgv_current";
             this.dgv_current.Size = new System.Drawing.Size(444, 152);
             this.dgv_current.TabIndex = 21;
-            // 
-            // btn_saveData
-            // 
-            this.btn_saveData.Location = new System.Drawing.Point(222, 389);
-            this.btn_saveData.Name = "btn_saveData";
-            this.btn_saveData.Size = new System.Drawing.Size(75, 23);
-            this.btn_saveData.TabIndex = 23;
-            this.btn_saveData.Text = "Save Data";
-            this.btn_saveData.UseVisualStyleBackColor = true;
-            this.btn_saveData.Click += new System.EventHandler(this.btn_saveData_Click);
-            // 
-            // cB_saveData
-            // 
-            this.cB_saveData.AutoSize = true;
-            this.cB_saveData.Location = new System.Drawing.Point(334, 393);
-            this.cB_saveData.Name = "cB_saveData";
-            this.cB_saveData.Size = new System.Drawing.Size(102, 17);
-            this.cB_saveData.TabIndex = 24;
-            this.cB_saveData.Text = "Auto Data Save";
-            this.cB_saveData.UseVisualStyleBackColor = true;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -321,6 +303,26 @@
             // 
             this.dataGridViewTextBoxColumn4.HeaderText = "Pin8_Z";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            // 
+            // btn_saveData
+            // 
+            this.btn_saveData.Location = new System.Drawing.Point(222, 389);
+            this.btn_saveData.Name = "btn_saveData";
+            this.btn_saveData.Size = new System.Drawing.Size(75, 23);
+            this.btn_saveData.TabIndex = 23;
+            this.btn_saveData.Text = "Save Data";
+            this.btn_saveData.UseVisualStyleBackColor = true;
+            this.btn_saveData.Click += new System.EventHandler(this.btn_saveData_Click);
+            // 
+            // cB_saveData
+            // 
+            this.cB_saveData.AutoSize = true;
+            this.cB_saveData.Location = new System.Drawing.Point(334, 393);
+            this.cB_saveData.Name = "cB_saveData";
+            this.cB_saveData.Size = new System.Drawing.Size(102, 17);
+            this.cB_saveData.TabIndex = 24;
+            this.cB_saveData.Text = "Auto Data Save";
+            this.cB_saveData.UseVisualStyleBackColor = true;
             // 
             // dgv_savedValues
             // 
@@ -481,10 +483,32 @@
             this.dataGridViewTextBoxColumn50.HeaderText = "Pin8_Z";
             this.dataGridViewTextBoxColumn50.Name = "dataGridViewTextBoxColumn50";
             // 
+            // btn_ResetCurrent
+            // 
+            this.btn_ResetCurrent.Location = new System.Drawing.Point(50, 334);
+            this.btn_ResetCurrent.Name = "btn_ResetCurrent";
+            this.btn_ResetCurrent.Size = new System.Drawing.Size(75, 23);
+            this.btn_ResetCurrent.TabIndex = 26;
+            this.btn_ResetCurrent.Text = "Reset";
+            this.btn_ResetCurrent.UseVisualStyleBackColor = true;
+            this.btn_ResetCurrent.Click += new System.EventHandler(this.btn_ResetCurrent_Click);
+            // 
+            // btn_ResetSaved
+            // 
+            this.btn_ResetSaved.Location = new System.Drawing.Point(500, 334);
+            this.btn_ResetSaved.Name = "btn_ResetSaved";
+            this.btn_ResetSaved.Size = new System.Drawing.Size(75, 23);
+            this.btn_ResetSaved.TabIndex = 27;
+            this.btn_ResetSaved.Text = "Reset";
+            this.btn_ResetSaved.UseVisualStyleBackColor = true;
+            this.btn_ResetSaved.Click += new System.EventHandler(this.btn_ResetSaved_Click);
+            // 
             // LMIView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btn_ResetSaved);
+            this.Controls.Add(this.btn_ResetCurrent);
             this.Controls.Add(this.dgv_savedValues);
             this.Controls.Add(this.cB_saveData);
             this.Controls.Add(this.btn_saveData);
@@ -564,5 +588,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn48;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn49;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn50;
+        private System.Windows.Forms.Button btn_ResetCurrent;
+        private System.Windows.Forms.Button btn_ResetSaved;
     }
 }

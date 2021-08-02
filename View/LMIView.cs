@@ -43,7 +43,7 @@ namespace DDM_Messwagen
 
         private void IntializeCHARTControl()
         {
-
+            
         }
 
         public IActorRef GetViewModel(ActorSystem actorSystemRef)
@@ -158,6 +158,7 @@ namespace DDM_Messwagen
             startAdvancedView();
         }
 
+
         private void addCurrentGridView(ReceiveLMI1Actor.LMIData lmiData)
         {
             var measurement = lmiData.MyMeasurement;
@@ -168,6 +169,20 @@ namespace DDM_Messwagen
 
                     var newRow = new string[1000];
                     var index = 1;
+                    foreach (var pin in lmiData.Data)
+                    {
+                        newRow[index] = pin.Value[0];
+                        newRow[index + 1] = pin.Value[1];
+                        newRow[index + 2] = pin.Value[2];
+
+                        index = index + 3;
+                    }
+                    dgv_current.Rows.Add(newRow.ToArray());
+                    break;
+                case ReceiveLMI1Actor.LMIData.Measurement.ImprofeSchweiszen:
+
+                    newRow = new string[1000];
+                    index = 1;
                     foreach (var pin in lmiData.Data)
                     {
                         newRow[index] = pin.Value[0];
@@ -193,6 +208,20 @@ namespace DDM_Messwagen
 
                     var newRow = new string[1000];
                     var index = 1;
+                    foreach (var pin in lmiData.Data)
+                    {
+                        newRow[index] = pin.Value[0];
+                        newRow[index + 1] = pin.Value[1];
+                        newRow[index + 2] = pin.Value[2];
+
+                        index = index + 3;
+                    }
+                    dgv_savedValues.Rows.Add(newRow.ToArray());
+                    break;
+                case ReceiveLMI1Actor.LMIData.Measurement.ImprofeSchweiszen:
+
+                    newRow = new string[1000];
+                    index = 1;
                     foreach (var pin in lmiData.Data)
                     {
                         newRow[index] = pin.Value[0];
@@ -239,6 +268,16 @@ namespace DDM_Messwagen
             }
             countCurrent = 0;
             dgv_current.Rows.Clear();
+        }
+
+        private void btn_ResetCurrent_Click(object sender, EventArgs e)
+        {
+            while(dataBuffer.TryDequeue(out var outData)) { }
+        }
+
+        private void btn_ResetSaved_Click(object sender, EventArgs e)
+        {
+            while(savedDataBuffer.TryDequeue(out var outData)) { }
         }
     }
 }

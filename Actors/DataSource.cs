@@ -31,7 +31,7 @@ namespace DDM_Messwagen.Actors
                    {
                        StartGenerator(gcm.Data);
                    }
-                   catch
+                   catch(Exception ex)
                    {
 
                    }
