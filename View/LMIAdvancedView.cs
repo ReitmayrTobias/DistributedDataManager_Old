@@ -67,20 +67,31 @@ namespace DDM_Messwagen
 
             switch (measurement)
             {
-                case ReceiveLMI1Actor.LMIData.Measurement.Daimler:
-                    
+                case ReceiveLMI1Actor.LMIData.Measurement.Daimler:                  
                     var newRow = new string[1000];
                     var index = 1;
                     foreach (var pin in lmiData.Data)
                     {
-                        for(int i = 1; i <= 8; i++)
+                        if (pin.Value[0] != "Not found")
                         {
                             chart_Z.Series[pin.Key].Points.AddY(pin.Value[2]);
                             chart_Y.Series[pin.Key].Points.AddY(pin.Value[1]);
                             chart_X.Series[pin.Key].Points.AddY(pin.Value[0]);
                         }
-
                     }                 
+                    break;
+                case ReceiveLMI1Actor.LMIData.Measurement.ImprofeSchweiszen:
+                    newRow = new string[1000];
+                    index = 1;
+                    foreach (var pin in lmiData.Data)
+                    {
+                        if (pin.Value[0] != "Not found")
+                        {
+                            chart_Z.Series[pin.Key].Points.AddY(pin.Value[2]);
+                            chart_Y.Series[pin.Key].Points.AddY(pin.Value[1]);
+                            chart_X.Series[pin.Key].Points.AddY(pin.Value[0]);
+                        }
+                    }
                     break;
                 default:
                     break;
@@ -89,72 +100,92 @@ namespace DDM_Messwagen
 
         private void updateCharacterstics()
         {
-
-            
-            //All X-Values
-            List<List<double>> xValues = new List<List<double>>(8);
-            List<List<double>> yValues = new List<List<double>>(8);
-            List<List<double>> zValues = new List<List<double>>(8);
-
-            for(int i = 0; i < 8; i++)
+            try
             {
-                xValues.Add(new List<double>());
-                yValues.Add(new List<double>());
-                zValues.Add(new List<double>());
-            }
+                dataBuffer.TryPeek(out var measurementData);
 
-            int pinCount= 0;
-            
-            foreach (var row in dataBuffer)
-            {
-                foreach(var pin in row.Data)
+                switch (measurementData.MyMeasurement)
                 {
-                    
-                    xValues[pinCount].Add(Convert.ToDouble(pin.Value[0]));
-                    yValues[pinCount].Add(Convert.ToDouble(pin.Value[1]));
-                    zValues[pinCount].Add(Convert.ToDouble(pin.Value[2]));
-                    pinCount++;
+                    case ReceiveLMI1Actor.LMIData.Measurement.Daimler:
+
+                        #region Daimler Update Characteristics
+
+                        List<List<double>> xValues = new List<List<double>>(8);
+                        List<List<double>> yValues = new List<List<double>>(8);
+                        List<List<double>> zValues = new List<List<double>>(8);
+
+                        for (int i = 0; i < 8; i++)
+                        {
+                            xValues.Add(new List<double>());
+                            yValues.Add(new List<double>());
+                            zValues.Add(new List<double>());
+                        }
+
+                        int pinCount = 0;
+
+                        foreach (var row in dataBuffer)
+                        {
+                            foreach (var pin in row.Data)
+                            {
+                                if (pin.Value[0] != "Not found")
+                                {
+                                    xValues[pinCount].Add(Convert.ToDouble(pin.Value[0]));
+                                    yValues[pinCount].Add(Convert.ToDouble(pin.Value[1]));
+                                    zValues[pinCount].Add(Convert.ToDouble(pin.Value[2]));
+                                }
+                                pinCount++;
+                            }
+                            pinCount = 0;
+                        }
+
+                        var meanX = calculateMean(xValues);
+                        var meanY = calculateMean(yValues);
+                        var meanZ = calculateMean(zValues);
+
+                        var minX = calculateMin(xValues);
+                        var minY = calculateMin(yValues);
+                        var minZ = calculateMin(zValues);
+
+                        var maxX = calculateMax(xValues);
+                        var maxY = calculateMax(yValues);
+                        var maxZ = calculateMax(zValues);
+
+                        var devX = calculateDeviation(xValues);
+                        var devY = calculateDeviation(yValues);
+                        var devZ = calculateDeviation(zValues);
+
+                        dgv_X.Rows.Clear();
+                        dgv_Y.Rows.Clear();
+                        dgv_Z.Rows.Clear();
+
+                        dgv_X.Rows.Add(meanX.ToArray());
+                        dgv_X.Rows.Add(minX.ToArray());
+                        dgv_X.Rows.Add(maxX.ToArray());
+                        dgv_X.Rows.Add(devX.ToArray());
+
+                        dgv_Y.Rows.Add(meanY.ToArray());
+                        dgv_Y.Rows.Add(minY.ToArray());
+                        dgv_Y.Rows.Add(maxY.ToArray());
+                        dgv_Y.Rows.Add(devY.ToArray());
+
+                        dgv_Z.Rows.Add(meanZ.ToArray());
+                        dgv_Z.Rows.Add(minZ.ToArray());
+                        dgv_Z.Rows.Add(maxZ.ToArray());
+                        dgv_Z.Rows.Add(devZ.ToArray());
+
+                        #endregion 
+
+                        break;
+                    default:
+                        break;
                 }
-                pinCount = 0;
+                
             }
+            catch(Exception ex)
+            {
 
-            var meanX = calculateMean(xValues);
-            var meanY = calculateMean(yValues);
-            var meanZ = calculateMean(zValues);
-
-            var minX = calculateMin(xValues);
-            var minY = calculateMin(yValues);
-            var minZ = calculateMin(zValues);
-
-            var maxX = calculateMax(xValues);
-            var maxY = calculateMax(yValues);
-            var maxZ = calculateMax(zValues);
-
-            var devX = calculateDeviation(xValues);
-            var devY = calculateDeviation(yValues);
-            var devZ = calculateDeviation(zValues);
-
-            dgv_X.Rows.Clear();
-            dgv_Y.Rows.Clear();
-            dgv_Z.Rows.Clear();
-
-            dgv_X.Rows.Add(meanX.ToArray());
-            dgv_X.Rows.Add(minX.ToArray());
-            dgv_X.Rows.Add(maxX.ToArray());
-            dgv_X.Rows.Add(devX.ToArray());
-
-            dgv_Y.Rows.Add(meanY.ToArray());
-            dgv_Y.Rows.Add(minY.ToArray());
-            dgv_Y.Rows.Add(maxY.ToArray());
-            dgv_Y.Rows.Add(devY.ToArray());
-
-            dgv_Z.Rows.Add(meanZ.ToArray());
-            dgv_Z.Rows.Add(minZ.ToArray());
-            dgv_Z.Rows.Add(maxZ.ToArray());
-            dgv_Z.Rows.Add(devZ.ToArray());
-
-
-
+            }
+        
         }
 
         private string[] calculateMean(List<List<double>> values)
@@ -165,8 +196,10 @@ namespace DDM_Messwagen
             foreach( var pin in values)
             {
                 i++;
-                mean[i] = pin.Average().ToString();
-                
+                if(pin.Count != 0)
+                {
+                    mean[i] = pin.Average().ToString();
+                }    
             }
 
             return mean;
@@ -180,11 +213,12 @@ namespace DDM_Messwagen
             foreach (var pin in values)
             {
                 i++;
-                double average = pin.Average();
-                double sumOfSquaresOfDifferences = pin.Select(val => (val - average) * (val - average)).Sum();
-                dev[i] = Math.Sqrt(sumOfSquaresOfDifferences / pin.Count).ToString();
-
-
+                if(pin.Count != 0)
+                {
+                    double average = pin.Average();
+                    double sumOfSquaresOfDifferences = pin.Select(val => (val - average) * (val - average)).Sum();
+                    dev[i] = Math.Sqrt(sumOfSquaresOfDifferences / pin.Count).ToString();
+                }            
             }
 
             return dev;
@@ -198,8 +232,10 @@ namespace DDM_Messwagen
             foreach (var pin in values)
             {
                 i++;
-                max[i] = pin.Max().ToString();
-
+                if (pin.Count != 0)
+                {
+                    max[i] = pin.Max().ToString();
+                }
             }
 
             return max;
@@ -213,10 +249,12 @@ namespace DDM_Messwagen
             foreach (var pin in values)
             {
                 i++;
-                min[i] = pin.Min().ToString();
+                if (pin.Count != 0)
+                {
+                    min[i] = pin.Min().ToString();
+                }
 
             }
-
             return min;
         }
 

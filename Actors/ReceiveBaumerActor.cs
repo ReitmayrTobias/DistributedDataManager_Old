@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using Akka.Actor;
 using Akka.Actor.Dsl;
 using Akka.Event;
+using BGAPI2;
 
 namespace DDM_Messwagen.Actors
 {
@@ -26,13 +27,42 @@ namespace DDM_Messwagen.Actors
             Publish(new DDMViewModel.ViewData(null, this));
             Generator = Task.Run(() =>
             {
+                BGAPI2.SystemList systemList = null;
+                BGAPI2.System mSystem = null;
+                string sSystemID = "";
+
+                BGAPI2.InterfaceList interfaceList = null;
+                BGAPI2.Interface mInterface = null;
+                string sInterfaceID = "";
+
+                BGAPI2.DataStreamList datastreamList = null;
+                BGAPI2.DataStream mDataStream = null;
+                string sDataStreamID = "";
+
+                BufferList bufferList = null;
+                BGAPI2.Buffer mBuffer = null;
+
+                try
+                {
+                    systemList = SystemList.Instance;
+                    systemList.Refresh();
+                    System.Console.Write("5.1.2 Detected systems: {0}\n", systemList.Count);
+                }
+                catch (BGAPI2.Exceptions.IException ex)
+                {
+                    System.Console.Write("ErrorType: {0}.\n", ex.GetType());
+                    System.Console.Write("ErrorException {0}.\n", ex.GetErrorDescription());
+                    System.Console.Write("in function: {0}.\n", ex.GetFunctionName());
+                }
+
+
+
                 while (CurrentState != State.Stopped)
                 {
                     if (CurrentState == State.Running)
                     {
-                        Random rnd = new Random();
-                        BaumerData newData = new BaumerData(rnd.NextDouble() + 5);
-                        Publish(newData);
+                       
+                        //Publish(newData);
                         Thread.Sleep(100);
                     }
                 }

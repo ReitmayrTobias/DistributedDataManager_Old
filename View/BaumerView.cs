@@ -34,27 +34,7 @@ namespace DDM_Messwagen
 
         private void IntializeCHARTControl()
         {           
-            chartCont.Series["Series1"].Points.Clear();
-            chartCont.Series["Series1"].Color = Color.IndianRed;
-            chartCont.Series["Series1"].BorderWidth = 5;
             
-            chartCont.ChartAreas[0].AxisY.Maximum = 10;
-            chartCont.ChartAreas[0].AxisY.Minimum = 0;
-            chartCont.ChartAreas[0].AxisY.MajorGrid.LineWidth = 0;
-            chartCont.ChartAreas[0].AxisX.MajorGrid.LineWidth = 0;
-            chartCont.ChartAreas[0].AxisY.MajorGrid.Enabled = true;
-
-            chartOverall.Series["Series1"].Points.Clear();
-            chartOverall.Series["Series1"].Color = Color.Green;
-            chartOverall.Series["Series1"].BorderWidth = 5;
-
-            chartOverall.ChartAreas[0].AxisY.Maximum = 10;
-            chartOverall.ChartAreas[0].AxisY.Minimum = 0;
-            chartOverall.ChartAreas[0].AxisY.MajorGrid.LineWidth = 0;
-            chartOverall.ChartAreas[0].AxisX.MajorGrid.LineWidth = 0;
-
-
-
         }
 
         public IActorRef GetViewModel(ActorSystem actorSystemRef)
@@ -73,13 +53,7 @@ namespace DDM_Messwagen
                 ReceiveBaumerActor.BaumerData act, last = null;
                 while(dataBuffer.TryDequeue(out act))
                 {
-                    chartCont.Series["Series1"].Points.Add(act.DummyData);                  
-                    chartOverall.Series["Series1"].Points.Add(act.DummyData);
-                    chartOverall.ChartAreas[0].AxisX.Minimum = chartOverall.Series["Series1"].Points.Count - 10;
-
-
-
-                    textBox1.Text = act.DummyData.ToString();
+                    
                 }
             }catch(Exception ex)
             {

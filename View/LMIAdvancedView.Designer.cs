@@ -319,7 +319,7 @@
             this.Pin8});
             this.dgv_X.Location = new System.Drawing.Point(12, 57);
             this.dgv_X.Name = "dgv_X";
-            this.dgv_X.Size = new System.Drawing.Size(466, 152);
+            this.dgv_X.Size = new System.Drawing.Size(425, 152);
             this.dgv_X.TabIndex = 26;
             // 
             // Measurement
@@ -391,7 +391,7 @@
             this.dataGridViewTextBoxColumn9});
             this.dgv_Y.Location = new System.Drawing.Point(12, 272);
             this.dgv_Y.Name = "dgv_Y";
-            this.dgv_Y.Size = new System.Drawing.Size(466, 152);
+            this.dgv_Y.Size = new System.Drawing.Size(425, 152);
             this.dgv_Y.TabIndex = 27;
             // 
             // dataGridViewTextBoxColumn1
@@ -463,7 +463,7 @@
             this.dataGridViewTextBoxColumn18});
             this.dgv_Z.Location = new System.Drawing.Point(12, 489);
             this.dgv_Z.Name = "dgv_Z";
-            this.dgv_Z.Size = new System.Drawing.Size(466, 152);
+            this.dgv_Z.Size = new System.Drawing.Size(425, 152);
             this.dgv_Z.TabIndex = 28;
             // 
             // dataGridViewTextBoxColumn10
